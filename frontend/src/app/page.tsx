@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import { Class } from '../../types/class'
 import {
@@ -9,7 +10,6 @@ import {
   Text,
   createTheme,
 } from '@mantine/core'
-
 export const Home: React.FC = () => {
   const [classes, setClasses] = useState<Class[]>([])
 
