@@ -13,7 +13,7 @@ class ClassViewSet(viewsets.ModelViewSet):
 
 
 @csrf_exempt
-def get_classes():
+def get_classes(request):
     classes = list(Class.objects.values())
     return JsonResponse(classes, safe=False)
 
