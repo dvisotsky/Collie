@@ -23,7 +23,8 @@ import Link from 'next/link'
 const mainLinks = [
   { icon: IconHome2, label: 'Home', link: '/' },
   { icon: IconUser, label: 'Groups', link: '/groups' },
-  { icon: IconUser, label: 'People', link: '/people' },
+  { icon: IconUser, label: 'Members', link: '/members' },
+  { icon: IconUser, label: 'Staff', link: '/staff' },
 ]
 
 export default function RootLayout({
@@ -41,7 +42,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <MantineProvider theme={pineRoseTheme}>
+        <MantineProvider theme={pineRoseTheme} defaultColorScheme='light'>
           <AppShell
             header={{ height: 60 }}
             navbar={{
@@ -74,7 +75,7 @@ export default function RootLayout({
 }
 
 const pineRoseTheme = createTheme({
-  primaryColor: 'blue',
+  primaryColor: 'BLUE',
   primaryShade: 6,
   colors: {
     GRAY: [
