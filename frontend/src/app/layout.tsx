@@ -1,12 +1,22 @@
 'use client'
 import '../../styles/global.css'
 import '@mantine/core/styles.css'
-import { AppShell, Burger, Button, MantineProvider, createTheme } from '@mantine/core'
+import {
+  AppShell,
+  Burger,
+  Button,
+  MantineProvider,
+  createTheme,
+} from '@mantine/core'
 import { useState } from 'react'
 import {
   IconCalendarStats,
   IconDeviceDesktopAnalytics,
-  IconFingerprint, IconGauge, IconHome2, IconSettings, IconUser
+  IconFingerprint,
+  IconGauge,
+  IconHome2,
+  IconSettings,
+  IconUser,
 } from '@tabler/icons-react'
 import Link from 'next/link'
 
@@ -25,6 +35,9 @@ export default function RootLayout({
 }) {
   const [opened, setOpened] = useState(true)
 
+  // todo: notifications https://mantine.dev/core/notification/
+  const [notifications, setNotifications] = useState<string[]>([])
+
   return (
     <html>
       <body>
@@ -34,7 +47,7 @@ export default function RootLayout({
             navbar={{
               width: 200,
               breakpoint: 'sm',
-              collapsed: { mobile: !opened }
+              collapsed: { mobile: !opened },
             }}
           >
             <AppShell.Header>
@@ -42,21 +55,17 @@ export default function RootLayout({
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
                 hiddenFrom='sm'
-                size='sm'>
-              </Burger>
+                size='sm'
+              ></Burger>
             </AppShell.Header>
-            <AppShell.Navbar p='md' style={{ gap: 8 }} >
+            <AppShell.Navbar p='md' style={{ gap: 8 }}>
               {mainLinks.map((link, index) => (
                 <Link href={link.link} style={{ width: '100%' }}>
-                  <Button key={index} >
-                    {link.label}
-                  </Button>
+                  <Button key={index}>{link.label}</Button>
                 </Link>
               ))}
             </AppShell.Navbar>
-            <AppShell.Main>
-              {children}
-            </AppShell.Main>
+            <AppShell.Main>{children}</AppShell.Main>
           </AppShell>
         </MantineProvider>
       </body>

@@ -3,8 +3,8 @@ from rest_framework.routers import DefaultRouter
 from .views import ClassViewSet
 
 router = DefaultRouter()
-router.register(r"classes", ClassViewSet)
+router.register(r"groups", ClassViewSet)
 
 urlpatterns = [
-    path("", include("class_app.urls")),
+    path("", include("group_app.urls")),
 ]

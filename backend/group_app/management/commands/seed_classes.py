@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from class_app.models import Class
+from group_app.models import Group
 
 
 class Command(BaseCommand):
@@ -7,10 +7,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         classes = [
-            Class(name="Cubbies"),
-            Class(name="Sparks"),
-            Class(name="T&T"),
-            Class(name="Trek"),
+            Group(name="Cubbies"),
+            Group(name="Sparks"),
+            Group(name="T&T"),
+            Group(name="Trek"),
         ]
         for c in classes:
             c.save()

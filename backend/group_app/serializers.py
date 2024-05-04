@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import Class
+from .models import Group
 
 
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Class
+        model = Group
         fields = "__all__"
         read_only_fields = ["id"]
