@@ -23,7 +23,7 @@ from staff_app import views
 router = DefaultRouter()
 router.register(r'groups', views.GroupViewSet)
 router.register(r'staff', views.StaffViewSet)
-router.register(r'group_member', views.GroupMemberViewSet)
+router.register(r'members', views.GroupMemberViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

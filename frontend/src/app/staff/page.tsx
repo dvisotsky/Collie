@@ -1,16 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Staff } from '../../types/staff'
+import { Staff } from '../../types'
 import { getStaff } from '../../api/staff'
+import { Table } from '@mantine/core'
 
 const StaffPage: React.FC = () => {
-  // Replace this with your staff data
-  const staffData = [
-    { id: 1, name: 'John Doe', position: 'Manager' },
-    { id: 2, name: 'Jane Smith', position: 'Assistant' },
-    // Add more staff data here
-  ]
-
   const [staff, setStaff] = useState<Staff[]>([])
 
   const fetchStaff = async () => {
@@ -30,23 +24,22 @@ const StaffPage: React.FC = () => {
   return (
     <div>
       <h1>Staff List</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody>
-          {staff.map((staff) => (
-            <tr key={staff.id}>
-              <td>{staff.id}</td>
-              <td>{staff.name}</td>
-            </tr>
+      <Table>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>ID</Table.Th>
+            <Table.Th>Name</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {staff.map((s) => (
+            <Table.Tr key={s.id}>
+              <Table.Td>{s.id}</Table.Td>
+              <Table.Td>{s.name}</Table.Td>
+            </Table.Tr>
           ))}
-        </tbody>
-      </table>
+        </Table.Tbody>
+      </Table>
     </div>
   )
 }

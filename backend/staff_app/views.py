@@ -8,8 +8,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 class StaffViewSet(viewsets.ModelViewSet):
-    queryset = Staff.objects.all()
     serializer_class = StaffSerializer
+    def get_queryset(self):
+        queryset = Staff.objects.all()
+        queryset = queryset.prefetch_related('group_set')
+        return queryset
 
 class GroupMemberViewSet(viewsets.ModelViewSet):
     queryset = GroupMember.objects.all()
