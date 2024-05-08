@@ -3,6 +3,7 @@ import { Button, Container, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { postGroup } from '../../../api/group'
 
 const CreateGroupPage: React.FC = () => {
   const router = useRouter()
@@ -20,26 +21,11 @@ const CreateGroupPage: React.FC = () => {
   })
 
   const createGroup = async (values: { name: string }) => {
-    console.log('vals', values)
-    try {
-      const response = await fetch('http://localhost:8000/groups/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-      if (response.ok) {
-        const data = await response.json()
-        console.log('response:', data)
-        console.log('Group created')
-        router.push(`/groups/${values.name}?id=${data.id}`)
-      } else {
-        console.error('Error creating group')
+    postGroup(values).then((response) => {
+      if (response.data) {
+        router.push(`/groups/${response.data.id}`)
       }
-    } catch (error) {
-      console.error('Error creating group:', error)
-    }
+    })
   }
 
   return (
