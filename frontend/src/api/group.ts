@@ -1,6 +1,6 @@
 import { apiResponse } from './types'
 
-export const getGroups = async (): Promise<apiResponse> => {
+export const showGroups = async (): Promise<apiResponse> => {
   try {
     const response = await fetch('http://localhost:8000/groups')
     const data = await response.json()
@@ -9,6 +9,17 @@ export const getGroups = async (): Promise<apiResponse> => {
     console.error('Error fetching classes:', error)
     return { data: null, error }
   }
+}
+export const showGroup = async (groupId: number): Promise<apiResponse> => {
+  let group = null
+  try {
+    const response = await fetch(`http://localhost:8000/groups/${groupId}`)
+    group = await response.json()
+  } catch (error) {
+    console.error('Error fetching group:', error)
+    return { data: null, error }
+  }
+  return { data: group }
 }
 
 export const postGroup = async (values: {

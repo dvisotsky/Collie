@@ -2,8 +2,8 @@
 import { Group as UIGroup, Card, Button } from '@mantine/core'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { Group } from '../../types/group'
 import { useRouter } from 'next/navigation'
+import { Group } from '../../types'
 
 const GroupPage = () => {
   const router = useRouter()
@@ -33,11 +33,13 @@ const GroupPage = () => {
         {groups.map((c, i) => (
           <Link
             href={{
-              pathname: `/groups/${c.name}`,
-              query: { id: c.id },
+              pathname: `/groups/${c.id}`,
             }}
           >
-            <Card withBorder key={i}>
+            <Card
+              withBorder
+              key={i}
+            >
               {c.name}
             </Card>
           </Link>

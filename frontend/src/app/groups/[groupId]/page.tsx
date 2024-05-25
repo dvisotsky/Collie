@@ -4,32 +4,23 @@ import { Group } from '../../../types'
 import Link from 'next/link'
 import { Button, Flex, Skeleton } from '@mantine/core'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { showGroup } from '../../../api/group'
 
-const GroupPage = () => {
-  const pathName = usePathname()
-  const searchParams = useSearchParams()
-  const groupId = searchParams.get('id')
-  const groupName = decodeURIComponent(pathName.split('/').pop() || '')
-
+const GroupPage = ({ params }: { params: { groupId: number } }) => {
   const [group, setGroup] = useState<Group | null>(null)
   const [loading, setLoading] = useState(false)
 
   const fetchGroup = async () => {
     setLoading(true)
-    try {
-      const response = await fetch(`http://localhost:8000/groups/${groupId}`)
-      const data = await response.json()
-      setGroup(data)
-    } catch (error) {
-      console.error('Error fetching group:', error)
-    } finally {
-      setLoading(false)
-    }
+    const response = await showGroup(params.groupId)
+    setGroup(response.data)
+    setLoading(false)
   }
 
   useEffect(() => {
     fetchGroup()
   }, [])
+
   return (
     <div>
       <Skeleton visible={loading}>
