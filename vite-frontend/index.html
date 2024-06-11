@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="main.css"
+    />
+    <title>Collie</title>
+    <script>
+      window.onload = fetchGroups()
+
+      function fetchGroups() {
+        fetch('http://localhost:8000/groups')
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+            const groupList = document.getElementById('groupList')
+            if (data.length === 0) {
+              const li = document.createElement('li')
+              li.textContent = 'No groups found'
+              groupList.appendChild(li)
+              return
+            }
+            data
+              .forEach((group) => {
+                const li = document.createElement('li')
+                li.textContent = group.name
+                groupList.appendChild(li)
+              })
+              .catch((error) => {
+                console.error(error)
+              })
+          })
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Collie</h1>
+      <h3>Groups</h3>
+
+      <a href="/groups/create">Create Group</a>
+      <ul id="groupList"></ul>
+    </div>
+  </body>
+</html>
