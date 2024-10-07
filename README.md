@@ -4,7 +4,6 @@ Welcome to Collie, a web application designed to streamline classroom management
 
 ## Staff
 Owners and operators of [Groups](#groups).
-They can either be Primary leaders of a Group or Secondary leaders.
 
 To Do:
 - [ ] View
