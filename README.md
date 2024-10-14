@@ -4,9 +4,16 @@ Welcome to Collie, a web application designed to streamline classroom management
 
 # Getting started
 You'll need the following software to get a local server running:
+
+Backend:
 - python
+- pip
+- django
+
+Frontend:
 - node.js
 - vite
+- npm
 
 # Functionality Outline
 
