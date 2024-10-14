@@ -2,6 +2,14 @@ Collie - Classroom Management Web App
 
 Welcome to Collie, a web application designed to streamline classroom management for educators and enhance the learning experience for students.
 
+# Getting started
+You'll need the following software to get a local server running:
+- python
+- node.js
+- vite
+
+# Functionality Outline
+
 ## Staff
 Owners and operators of [Groups](#groups).
 
