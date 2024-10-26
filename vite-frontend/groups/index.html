@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Group Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="styles.css"
-    />
-  </head>
-  <body>
-    <header>
-      <h1>Group Dashboard</h1>
-    </header>
 
-    <main>
-      <!-- Your group dashboard content goes here -->
-    </main>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Group Dashboard</title>
+  <link rel="stylesheet" href="../main.css" />
+</head>
 
-    <footer>
-      <p>&copy; 2022 Your Company. All rights reserved.</p>
-    </footer>
-  </body>
+<body>
+  <header>
+    <a href="/">
+      Collie
+    </a>
+    <h1>Group Dashboard</h1>
+  </header>
+
+  <main>
+    <script>
+      async function fetchGroups() {
+        try {
+          const response = await fetch('http://localhost:8000/groups');
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const groups = await response.json();
+          displayGroups(groups);
+        } catch (error) {
+          console.error('There has been a problem with your fetch operation:', error);
+        }
+      }
+
+      function displayGroups(groups) {
+        const groupsContainer = document.getElementById('groups-container');
+        groups.forEach(group => {
+          const groupElement = document.createElement('div');
+          groupElement.className = 'group';
+          groupElement.textContent = group.name;
+          groupsContainer.appendChild(groupElement);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', fetchGroups);
+    </script>
+
+    <div id="groups-container">
+      <!-- Groups will be displayed here -->
+    </div>
+  </main>
+
+</body>
+
 </html>
