@@ -2,13 +2,22 @@ Collie - Classroom Management Web App
 
 Welcome to Collie, a web application designed to streamline classroom management for educators and enhance the learning experience for students.
 
+# Background Info
+You will need a decent grasp of HTML, CSS, and JavaScript to be able to contribute to this project.
+If you're ever confused or don't know something, you're one of us. Welcome.
+
+For Collie, both backend and frontend are written in JavaScript.
+- [Express.js](https://expressjs.com/) is our framework for the backend.
+- The frontend is vanilla js (no framework or library), but we use [Vite](https://vite.dev/) to help with development servers and building the frontend.
+
+
 # Getting started
-You'll need the following software to get a local server running:
+You'll need the following software to get a local development server running:
+[Installing npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is the first step.
 
 Backend:
-- python
-- pip
-- django
+- node.js
+- npm
 
 Frontend:
 - node.js
@@ -16,6 +25,8 @@ Frontend:
 - npm
 
 # Functionality Outline
+Things required for the core of the app.
+Each of the following models will be a table in the database that the frontend will be able to display and request changes to through our express.js backend.
 
 ## Staff
 Owners and operators of [Groups](#groups).
