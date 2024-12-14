@@ -33,3 +33,28 @@ app.post("/groups", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+//endpoint to edit a group
+app.put("/groups/:id", (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+  db.run("UPDATE groups SET name = ? WHERE id = ?", [name, id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ changes: this.changes });
+  });
+});
+
+//endpoint to delete a group
+app.delete("/groups/:id", (req, res) => {
+  const { id } = req.params;
+  db.run("DELETE FROM groups WHERE id = ?", id, function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ changes: this.changes });
+  });
+});
