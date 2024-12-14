@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Dashboard</title>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="groups.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Group Dashboard</title>
-  <link rel="stylesheet" href="../main.css" />
-</head>
+  <body>
+    <header>
+      <a href="/"> Collie </a>
+      <h1>Group Dashboard</h1>
+      <a href="create.html">Create New Group</a>
+    </header>
 
-<body>
-  <header>
-    <a href="/">
-      Collie
-    </a>
-    <h1>Group Dashboard</h1>
-  </header>
-
-  <main>
-    <script>
-      async function fetchGroups() {
-        try {
-          const response = await fetch('http://localhost:8000/groups');
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+    <main>
+      <script>
+        async function fetchGroups() {
+          try {
+            const response = await fetch("http://localhost:8000/groups");
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            const groups = await response.json();
+            displayGroups(groups);
+          } catch (error) {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
           }
-          const groups = await response.json();
-          displayGroups(groups);
-        } catch (error) {
-          console.error('There has been a problem with your fetch operation:', error);
         }
-      }
 
-      function displayGroups(groups) {
-        const groupsContainer = document.getElementById('groups-container');
-        groups.forEach(group => {
-          const groupElement = document.createElement('div');
-          groupElement.className = 'group';
-          groupElement.textContent = group.name;
-          groupsContainer.appendChild(groupElement);
-        });
-      }
+        function displayGroups(groups) {
+          const groupsContainer = document.getElementById("groups-container");
+          groups.forEach((group) => {
+            const groupElement = document.createElement("div");
+            groupElement.className = "card group";
+            groupElement.textContent = group.name;
+            groupsContainer.appendChild(groupElement);
+          });
+        }
 
-      document.addEventListener('DOMContentLoaded', fetchGroups);
-    </script>
+        document.addEventListener("DOMContentLoaded", fetchGroups);
+      </script>
 
-    <div id="groups-container">
-      <!-- Groups will be displayed here -->
-    </div>
-  </main>
-
-</body>
-
+      <div id="groups-container">
+        <!-- Groups will be displayed here -->
+      </div>
+    </main>
+  </body>
 </html>

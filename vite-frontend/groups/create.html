@@ -6,6 +6,7 @@
   </head>
   <body>
     <div class="container">
+      <a href="/groups/index.html"> Groups </a>
       <h1>Create Group</h1>
       <form action="/groups" method="POST">
         <label for="group-name">Group Name:</label>
@@ -22,4 +23,42 @@
       </form>
     </div>
   </body>
+  <script>
+    async function createGroup(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const groupName = formData.get("group-name");
+      const groupDescription = formData.get("group-description");
+
+      try {
+        const response = await fetch("http://localhost:8000/groups", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: groupName,
+            description: groupDescription,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        window.location.href = "/groups/index.html";
+      } catch (error) {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("form");
+      form.addEventListener("submit", createGroup);
+    });
+  </script>
 </html>

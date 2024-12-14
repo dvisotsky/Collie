@@ -1,10 +1,19 @@
 import express from "express";
 import bodyParser from "body-parser";
 import db from "./database.js";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
 app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow localhost:3000
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 // Get all groups
 app.get("/groups", (req, res) => {
