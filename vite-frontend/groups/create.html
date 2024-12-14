@@ -32,11 +32,13 @@
       const groupDescription = formData.get("group-description");
 
       try {
+        // POST request using fetch() hitting the /groups endpoint in backend
         const response = await fetch("http://localhost:8000/groups", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+
           body: JSON.stringify({
             name: groupName,
             description: groupDescription,

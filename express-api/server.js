@@ -37,7 +37,7 @@ app.post("/groups", (req, res) => {
         res.status(500).json({ error: err.message });
         return;
       }
-      res.json({ id: this.lastID });
+      res.json({ id: this.lastID, name, description });
     }
   );
 });
