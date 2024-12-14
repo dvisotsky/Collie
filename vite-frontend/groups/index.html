@@ -16,39 +16,42 @@
     </header>
 
     <main>
-      <script>
-        async function fetchGroups() {
-          try {
-            const response = await fetch("http://localhost:8000/groups");
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            const groups = await response.json();
-            displayGroups(groups);
-          } catch (error) {
-            console.error(
-              "There has been a problem with your fetch operation:",
-              error
-            );
-          }
-        }
-
-        function displayGroups(groups) {
-          const groupsContainer = document.getElementById("groups-container");
-          groups.forEach((group) => {
-            const groupElement = document.createElement("div");
-            groupElement.className = "card group";
-            groupElement.textContent = group.name;
-            groupsContainer.appendChild(groupElement);
-          });
-        }
-
-        document.addEventListener("DOMContentLoaded", fetchGroups);
-      </script>
-
       <div id="groups-container">
         <!-- Groups will be displayed here -->
       </div>
     </main>
+    <script>
+      async function fetchGroups() {
+        try {
+          const response = await fetch("http://localhost:8000/groups");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const groups = await response.json();
+          displayGroups(groups);
+        } catch (error) {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        }
+      }
+
+      function displayGroups(groups) {
+        const groupsContainer = document.getElementById("groups-container");
+        groups.forEach((group) => {
+          const groupElement = document.createElement("div");
+          const groupLink = document.createElement("a");
+          groupLink.href = `groups/${group.id}`;
+          groupLink.textContent = group.name;
+          groupElement.appendChild(groupLink);
+          groupElement.className = "card group";
+          // groupElement.textContent = group.name;
+          groupsContainer.appendChild(groupElement);
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", fetchGroups);
+    </script>
   </body>
 </html>
