@@ -28,14 +28,18 @@ app.get("/groups", (req, res) => {
 
 // Create a new group
 app.post("/groups", (req, res) => {
-  const { name } = req.body;
-  db.run("INSERT INTO groups (name) VALUES (?)", [name], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
+  const { name, description } = req.body;
+  db.run(
+    "INSERT INTO groups (name, description) VALUES (?, ?)",
+    [name, description],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ id: this.lastID });
     }
-    res.json({ id: this.lastID });
-  });
+  );
 });
 
 // Start the server

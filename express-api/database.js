@@ -4,7 +4,7 @@ const db = new sqlite3.Database(":memory:");
 
 db.serialize(() => {
   db.run(
-    "CREATE TABLE groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)"
+    "CREATE TABLE groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT)"
   );
 });
 
