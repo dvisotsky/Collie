@@ -26,6 +26,19 @@ app.get("/groups", (req, res) => {
   });
 });
 
+// get a single group
+app.get("/groups/:id", (req, res) => {
+  const { id } = req.params;
+  db.get("SELECT * FROM groups WHERE id = ?", id, (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    console.log("group", id, row);
+    res.json(row);
+  });
+});
+
 // Create a new group
 app.post("/groups", (req, res) => {
   const { name, description } = req.body;
