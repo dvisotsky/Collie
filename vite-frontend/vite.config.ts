@@ -1,7 +1,10 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default defineConfig({
-    server: {
-        port: 3000
-    }
+  server: {
+    port: process.env.PORT ? Number(process.env.PORT) : 3000,
+  },
 });

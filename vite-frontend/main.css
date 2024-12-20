@@ -1,140 +1,206 @@
 /* General Styles */
-body {
-    background-color: #2E3440; /* Dark background */
-    color: #D8DEE9; /* Light text color */
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+:root {
+  --background-color: #2e3440;
+  --text-color: #d8dee9;
+  --heading-color: #eceff4;
+  --link-color: #88c0d0;
+  --link-hover-color: #81a1c1;
+  --container-bg-color: #3b4252;
+  --nav-bg-color: #3b4252;
+  --nav-link-color: #e5e9f0;
+  --nav-link-hover-bg-color: #4c566a;
+  --title-bg-color: #3b4252;
+  --button-bg-color: #5e81ac;
+  --button-hover-bg-color: #4c566a;
+  --input-bg-color: #434c5e;
+  --input-border-color: #4c566a;
+  --input-placeholder-color: #a3be8c;
+  --input-focus-border-color: #88c0d0;
+  --card-bg-color: #3b4252;
+  --card-title-color: #ebcb8b;
+  --footer-bg-color: #3b4252;
+  --footer-text-color: #e5e9f0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: #ECEFF4; /* Slightly lighter for headings */
-    margin-top: 0;
+body {
+  background-color: var(--background-color); /* Dark background */
+  color: var(--text-color); /* Light text color */
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: auto;
+}
+body {
+  background-color: var(--background-color); /* Dark background */
+  color: var(--text-color); /* Light text color */
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color); /* Slightly lighter for headings */
+  margin-top: 0;
 }
 
 a {
-    color: #88C0D0; /* Soft pastel blue for links */
-    text-decoration: none;
+  color: var(--link-color); /* Soft pastel blue for links */
+  text-decoration: none;
 }
 
 a:hover {
-    color: #81A1C1; /* Slightly darker on hover */
+  color: var(--link-hover-color); /* Slightly darker on hover */
 }
 
-
-/* Container */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Navigation Bar */
-.navbar {
-    background-color: #3B4252;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+nav {
+  background-color: var(--nav-bg-color);
+  display: flex;
+  padding: 0.5em 2em;
+  gap: 1em;
+  align-items: center;
+  border-radius: 0 0 1em 1em;
 }
 
-.navbar a {
-    color: #E5E9F0;
-    padding: 10px 15px;
-    text-decoration: none;
-    font-weight: bold;
+nav a {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 2px 8px;
 }
 
-.navbar a:hover {
-    background-color: #4C566A;
-    border-radius: 5px;
+nav a:hover {
+  background-color: var(--nav-link-hover-bg-color);
+  border-radius: 5px;
+}
+
+nav a.active {
+  background-color: var(--nav-link-hover-bg-color);
+  border-radius: 5px;
+}
+
+.title {
+  background-color: var(--title-bg-color);
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid var(--background-color);
 }
 
 /* Buttons */
 .button {
-    background-color: #5E81AC; /* Pastel blue */
-    color: #ECEFF4;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: var(--button-bg-color); /* Pastel blue */
+  color: var(--heading-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .button:hover {
-    background-color: #4C566A; /* Slightly darker on hover */
+  background-color: var(--button-hover-bg-color); /* Slightly darker on hover */
 }
 
 /* Forms */
-input, textarea {
-    background-color: #434C5E;
-    color: #D8DEE9;
-    border: 1px solid #4C566A;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
+input,
+textarea {
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
 }
 
-input::placeholder, textarea::placeholder {
-    color: #A3BE8C; /* Pastel green placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder-color); /* Pastel green placeholder */
 }
 
-input:focus, textarea:focus {
-    border-color: #88C0D0; /* Soft pastel blue on focus */
-    outline: none;
+input:focus,
+textarea:focus {
+  border-color: var(--input-focus-border-color); /* Soft pastel blue on focus */
+  outline: none;
 }
 
 /* Cards */
 .card {
-    background-color: #3B4252;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px 0;
+  background-color: var(--card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
 }
 
 .card h3 {
-    color: #EBCB8B; /* Pastel yellow for card titles */
+  color: var(--card-title-color); /* Pastel yellow for card titles */
 }
 
 /* Footer */
 .footer {
-    background-color: #3B4252;
-    color: #E5E9F0;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 /* Utility Classes */
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
 .mt-20 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .mb-20 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .p-20 {
-    padding: 20px;
+  padding: 20px;
 }
 
 .rounded {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 .shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #eceff4; /* Slightly lighter for headings */
+  margin-top: 0;
+}
+
+a {
+  color: #88c0d0; /* Soft pastel blue for links */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #81a1c1; /* Slightly darker on hover */
 }

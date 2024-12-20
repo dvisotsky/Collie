@@ -1,45 +1,19 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="stylesheet" href="main.css" />
+    <title>Collie</title>
+  </head>
 
-<head>
-  <link rel="stylesheet" href="main.css" />
-  <title>Collie</title>
-  <script>
-    window.onload = fetchGroups()
+  <body>
+    <div id="navbar"></div>
+  </body>
+  <script type="module">
+    import { insertNavbar, highlightActiveLink } from "./functions/navbar.ts";
 
-    function fetchGroups() {
-      fetch('http://localhost:8000/groups')
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-          const groupList = document.getElementById('groupList')
-          if (data.length === 0) {
-            const li = document.createElement('li')
-            li.textContent = 'No groups found'
-            groupList.appendChild(li)
-            return
-          }
-          data
-            .forEach((group) => {
-              const li = document.createElement('li')
-              li.textContent = group.name
-              groupList.appendChild(li)
-            })
-            .catch((error) => {
-              console.error(error)
-            })
-        })
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      insertNavbar("navbar");
+      highlightActiveLink();
+    });
   </script>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Collie</h1>
-
-    <a href="/groups/index">Groups</a>
-    <ul id="groupList"></ul>
-  </div>
-</body>
-
 </html>

@@ -5,53 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Dashboard</title>
     <link rel="stylesheet" href="../main.css" />
-    <link rel="stylesheet" href="groups.css" />
+    <link rel="stylesheet" href="index.css" />
   </head>
 
   <body>
-    <header>
-      <a href="/"> Collie </a>
-      <h1>Group Dashboard</h1>
-      <a href="create.html">Create New Group</a>
-    </header>
+    <div id="navbar"></div>
+    <a href="create.html">Create New Group</a>
 
-    <main>
-      <div id="groups-container">
-        <!-- Groups will be displayed here -->
-      </div>
-    </main>
-    <script>
-      async function fetchGroups() {
-        try {
-          const response = await fetch("http://localhost:8000/groups");
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const groups = await response.json();
-          displayGroups(groups);
-        } catch (error) {
-          console.error(
-            "There has been a problem with your fetch operation:",
-            error
-          );
-        }
-      }
-
-      function displayGroups(groups) {
-        const groupsContainer = document.getElementById("groups-container");
-        groups.forEach((group) => {
-          const groupElement = document.createElement("div");
-          const groupLink = document.createElement("a");
-          groupLink.href = `groups/${group.id}`;
-          groupLink.textContent = group.name;
-          groupElement.appendChild(groupLink);
-          groupElement.className = "card group";
-          // groupElement.textContent = group.name;
-          groupsContainer.appendChild(groupElement);
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", fetchGroups);
-    </script>
+    <div id="groups-container">
+      <!-- Groups will be displayed here -->
+    </div>
   </body>
+  <script type="module">
+    import { insertNavbar, highlightActiveLink } from "/functions/navbar.ts";
+
+    async function fetchGroups() {
+      try {
+        const response = await fetch("http://localhost:8000/groups");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const groups = await response.json();
+        displayGroups(groups);
+      } catch (error) {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      }
+    }
+
+    function displayGroups(groups) {
+      const groupsContainer = document.getElementById("groups-container");
+      groups.forEach((group) => {
+        const groupElement = document.createElement("div");
+        const groupLink = document.createElement("a");
+        groupLink.href = `/groups/show?id=${group.id}`;
+        groupLink.textContent = group.name;
+        groupElement.appendChild(groupLink);
+        groupElement.className = "card group";
+        // groupElement.textContent = group.name;
+        groupsContainer.appendChild(groupElement);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      insertNavbar("navbar");
+      fetchGroups();
+    });
+  </script>
 </html>

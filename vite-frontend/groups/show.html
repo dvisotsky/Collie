@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../main.css" />
+    <title>Group Details</title>
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <h1>Group Details</h1>
+    <div><strong>Name:</strong> <span id="group-name"></span></div>
+    <div>
+      <strong>Description:</strong> <span id="group-description"></span>
+    </div>
+    <!-- Add more fields as necessary -->
+  </body>
+  <script type="module">
+    import { insertNavbar } from "/functions/navbar.ts";
+
+    async function fetchGroupDetails(groupId) {
+      try {
+        const response = await fetch("http://localhost:8000/groups/" + groupId);
+
+        const group = await response.json();
+
+        document.getElementById("group-name").textContent = group.name;
+        document.getElementById("group-description").textContent =
+          group.description;
+        // Add more fields as necessary
+      } catch (error) {
+        console.log(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const groupId = new URLSearchParams(window.location.search).get("id");
+      if (groupId) {
+        fetchGroupDetails(groupId);
+      } else {
+        console.error("Group ID not provided in the URL");
+      }
+
+      insertNavbar("navbar");
+    });
+  </script>
+</html>
