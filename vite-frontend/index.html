@@ -7,13 +7,27 @@
 
   <body>
     <div id="navbar"></div>
+    <div id="app"></div>
   </body>
   <script type="module">
     import { insertNavbar, highlightActiveLink } from "./functions/navbar.ts";
 
+    // Check authentication status
+    const checkAuth = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // If no token, redirect to login
+        window.location.href = "/pages/login.html";
+        return;
+      }
+      // If token exists, redirect to dashboard
+      window.location.href = "/pages/dashboard.html";
+    };
+
     document.addEventListener("DOMContentLoaded", () => {
       insertNavbar("navbar");
       highlightActiveLink();
+      checkAuth();
     });
   </script>
 </html>

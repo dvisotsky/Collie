@@ -1,20 +1,21 @@
 import sqlite3 from "sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
-import { open } from "sqlite";
+import { open, Database } from "sqlite";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 sqlite3.verbose();
 const dbPath = process.env.DB_PATH || path.join(__dirname, "db.sqlite");
-const db = await open({
+
+const db: Database = await open({
   filename: dbPath,
   driver: sqlite3.Database,
 });
 
 // Create tables if they don't exist
-db.exec(`
+await db.exec(`
   CREATE TABLE IF NOT EXISTS groups (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
