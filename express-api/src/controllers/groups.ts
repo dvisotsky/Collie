@@ -7,89 +7,86 @@ interface RunResult {
   changes: number;
 }
 
-export const getAllGroups = (
+export const getAllGroups = async (
   req: Request,
   res: Response<Group[] | { error: string }>
-): void => {
-  db.all("SELECT * FROM groups", [], (err: Error | null, rows: Group[]) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+): Promise<void> => {
+  try {
+    const rows = await db.all("SELECT * FROM groups", []);
     res.json(rows);
-  });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: err instanceof Error ? err.message : "Unknown error" });
+  }
 };
 
-export const getGroupById = (
+export const getGroupById = async (
   req: Request<{ id: string }>,
   res: Response<Group | { error: string }>
-): void => {
+): Promise<void> => {
   const { id } = req.params;
-  db.get(
-    "SELECT * FROM groups WHERE id = ?",
-    id,
-    (err: Error | null, row: Group | undefined) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      console.log("group", id, row);
-      res.json(row);
-    }
-  );
+  try {
+    const row = await db.get("SELECT * FROM groups WHERE id = ?", id);
+    res.json(row);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: err instanceof Error ? err.message : "Unknown error" });
+  }
 };
 
-export const createGroup = (
+export const createGroup = async (
   req: Request<{}, {}, { name: string; description?: string }>,
   res: Response<Group | { error: string }>
-): void => {
+): Promise<void> => {
   const { name, description } = req.body;
-  db.run(
-    "INSERT INTO groups (name, description) VALUES (?, ?)",
-    [name, description],
-    function (this: RunResult, err: Error | null) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ id: this.lastID, name, description: description || null });
-    }
-  );
+  try {
+    const result = (await db.run(
+      "INSERT INTO groups (name, description) VALUES (?, ?)",
+      [name, description]
+    )) as RunResult;
+    res.json({ id: result.lastID, name, description: description || null });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: err instanceof Error ? err.message : "Unknown error" });
+  }
 };
 
-export const updateGroup = (
+export const updateGroup = async (
   req: Request<{ id: string }, {}, { name: string }>,
   res: Response<{ changes: number } | { error: string }>
-): void => {
+): Promise<void> => {
   const { name } = req.body;
   const { id } = req.params;
-  db.run(
-    "UPDATE groups SET name = ? WHERE id = ?",
-    [name, id],
-    function (this: RunResult, err: Error | null) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ changes: this.changes });
-    }
-  );
+  try {
+    const result = (await db.run("UPDATE groups SET name = ? WHERE id = ?", [
+      name,
+      id,
+    ])) as RunResult;
+    res.json({ changes: result.changes });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: err instanceof Error ? err.message : "Unknown error" });
+  }
 };
 
-export const deleteGroup = (
+export const deleteGroup = async (
   req: Request<{ id: string }>,
   res: Response<{ changes: number } | { error: string }>
-): void => {
+): Promise<void> => {
   const { id } = req.params;
-  db.run(
-    "DELETE FROM groups WHERE id = ?",
-    id,
-    function (this: RunResult, err: Error | null) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json({ changes: this.changes });
-    }
-  );
+  try {
+    const result = (await db.run(
+      "DELETE FROM groups WHERE id = ?",
+      id
+    )) as RunResult;
+    res.json({ changes: result.changes });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: err instanceof Error ? err.message : "Unknown error" });
+  }
 };

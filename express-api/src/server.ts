@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -6,7 +7,7 @@ import usersRouter from "./routes/users.js";
 import { authenticateToken } from "./middleware/auth.js";
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -20,10 +21,9 @@ app.use(
 );
 
 // Routes
-app.use("/api/users", usersRouter);
-app.use("/api/groups", authenticateToken, groupsRouter);
+app.use("/users", usersRouter);
+app.use("/groups", authenticateToken, groupsRouter);
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
 });
